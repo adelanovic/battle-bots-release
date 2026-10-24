@@ -1,0 +1,54 @@
+{
+  "name": "battle-bots-desktop",
+  "version": "1.0.0",
+  "description": "Program robots in assembly and watch them fight in a 2D arena.",
+  "private": true,
+  "author": "adelanovic",
+  "license": "MIT",
+  "main": "desktop/main.js",
+  "repository": "https://github.com/adelanovic/battle-bots-release",
+  "scripts": {
+    "sync": "node scripts/sync-source.js",
+    "start": "electron .",
+    "test": "node app/tests/run-tests.js",
+    "test:desktop": "node scripts/smoke-test.js",
+    "dist": "electron-builder --win nsis --x64 --publish never"
+  },
+  "build": {
+    "appId": "io.github.adelanovic.battlebots",
+    "productName": "Battle Bots",
+    "executableName": "BattleBots",
+    "asar": true,
+    "files": [
+      "desktop/main.js",
+      "app/index.html",
+      "app/css/**/*",
+      "app/js/**/*",
+      "app/examples/**/*",
+      "app/LICENSE",
+      "app/Battle Bots Student Guide.pdf"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "artifactName": "BattleBotsSetup.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": false,
+      "license": "app/LICENSE"
+    }
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0"
+  }
+}
